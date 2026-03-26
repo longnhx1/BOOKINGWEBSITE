@@ -1,30 +1,76 @@
-@model IEnumerable<Product>   
+@using WebApplication1.Models
+@model IEnumerable<Product>
 
-<h2>Products</h2>   
-<table class="table">     
-    <thead>
-    <tr>             
-        <th>Name</th>             
-        <th>Price</th>             
-        <th>Description</th>             
-        <th>Category</th>             
-        <th>Actions</th>         
-    </tr>     
-    </thead>     
-    <tbody>     
-    @foreach (var product in Model)     
-    {         
-        <tr>            
-            <td>@product.Name</td>            
-            <td>@product.Price</td>            
-            <td>@product.Description</td>            
-            <td>@product.Category?.Name</td>            
-            <td>             
-                <a asp-action="Display" asp-route-id="@product.Id">View</a> |             
-                <a asp-action="Update" asp-route-id="@product.Id">Edit</a> |             
-                <a asp-action="Delete" asp-route-id="@product.Id">Delete</a>            
-            </td>         
-        </tr>     
-    }     
-    </tbody> 
-</table>
+@{
+    ViewData["Title"] = "Sản phẩm";
+}
+
+@section Styles
+{
+    <link rel="stylesheet" href="~/css/ecommerce/product-index.css" asp-append-version="true" />
+}
+
+<div class="page-header">
+    <div>
+        <h2 class="page-title">Sản phẩm</h2>
+        <div class="page-subtitle">Danh sách sản phẩm</div>
+    </div>
+
+    @if (User.IsInRole(SD.Role_Admin))
+    {
+        <a class="btn btn-primary" asp-area="Admin" asp-controller="Product" asp-action="Add">
+            Thêm sản phẩm
+        </a>
+    }
+</div>
+
+@if (Model == null || !Model.Any())
+{
+    <div class="empty-state">Chưa có sản phẩm.</div>
+}
+else
+{
+    <div class="grid-cards">
+        @foreach (var product in Model)
+        {
+            <div class="card-ecommerce">
+                <div class="product-image">
+                    @if (!string.IsNullOrWhiteSpace(product.ImageUrl))
+                    {
+                        <img class="product-image-img" src="@product.ImageUrl" alt="@product.Name" />
+                    }
+                    else
+                    {
+                        <div class="product-image-placeholder" aria-hidden="true"></div>
+                    }
+                </div>
+
+                <div class="card-ecommerce-body">
+                    <div class="product-title-row">
+                        <h3 class="card-title">@product.Name</h3>
+                        <span class="product-price">@product.Price.ToString("0.##")</span>
+                    </div>
+
+                    <div class="product-category">@product.Category?.Name</div>
+                    <div class="product-description">@product.Description</div>
+
+                    <div class="card-actions">
+                        <a class="btn btn-sm btn-outline-primary" asp-action="Display" asp-route-id="@product.Id">
+                            View
+                        </a>
+
+                        @if (User.IsInRole(SD.Role_Admin))
+                        {
+                            <a class="btn btn-sm btn-outline-secondary" asp-area="Admin" asp-controller="Product" asp-action="Update" asp-route-id="@product.Id">
+                                Edit
+                            </a>
+                            <a class="btn btn-sm btn-outline-danger" asp-area="Admin" asp-controller="Product" asp-action="Delete" asp-route-id="@product.Id">
+                                Delete
+                            </a>
+                        }
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+}

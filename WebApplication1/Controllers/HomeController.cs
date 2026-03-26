@@ -9,17 +9,30 @@ public class HomeController : Controller
 {
     private readonly ILogger<HomeController> _logger;
     private readonly IProductRepository _productRepository;
+    private readonly ICategoryRepository _categoryRepository;
 
-    public HomeController(ILogger<HomeController> logger, IProductRepository productRepository)
+    public HomeController(
+        ILogger<HomeController> logger,
+        IProductRepository productRepository,
+        ICategoryRepository categoryRepository)
     {
         _logger = logger;
         _productRepository = productRepository;
+        _categoryRepository = categoryRepository;
     }
 
     public async Task<IActionResult> Index()
     {
         var products = await _productRepository.GetAllAsync();
-        return View(products);
+        var categories = await _categoryRepository.GetAllAsync();
+
+        var vm = new HomeViewModel
+        {
+            Products = products,
+            Categories = categories
+        };
+
+        return View(vm);
     }
 
     public IActionResult Privacy()

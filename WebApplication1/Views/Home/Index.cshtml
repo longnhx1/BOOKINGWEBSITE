@@ -1,0 +1,102 @@
+@model WebApplication1.Models.HomeViewModel
+
+@{
+    ViewData["Title"] = "Home";
+}
+
+@section Styles
+{
+    <link rel="stylesheet" href="~/css/ecommerce/home.css" asp-append-version="true" />
+}
+
+<section class="hero">
+    <div class="container">
+        <div class="hero-inner">
+            <div class="hero-content">
+                <h1 class="hero-title">Điện thoại chính hãng</h1>
+                <p class="hero-subtitle">Danh mục và sản phẩm được cập nhật trực tiếp từ hệ thống. Đăng nhập (Role Admin) để quản lý và thêm sản phẩm mới.</p>
+                <div class="hero-actions">
+                    <a class="btn btn-primary" asp-controller="Product" asp-action="Index">Xem sản phẩm</a>
+                    <a class="btn btn-outline-primary" asp-controller="Categories" asp-action="Index">Xem danh mục</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="section">
+    <div class="container">
+        <div class="section-header">
+            <h2 class="section-title">Danh mục nổi bật</h2>
+            <a class="text-decoration-none section-link" asp-controller="Categories" asp-action="Index">
+                Xem tất cả
+            </a>
+        </div>
+
+        @if (Model.Categories == null || !Model.Categories.Any())
+        {
+            <div class="empty-state">Chưa có danh mục.</div>
+        }
+        else
+        {
+            <div class="grid-cards">
+                @foreach (var c in Model.Categories)
+                {
+                    <a class="card-link" asp-controller="Categories" asp-action="Display" asp-route-id="@c.Id">
+                        <div class="card-ecommerce">
+                            <div class="card-badge">Danh mục</div>
+                            <div class="card-body">
+                                <h3 class="card-title">@c.Name</h3>
+                                <div class="card-meta">@((c.Products?.Count ?? 0).ToString()) sản phẩm</div>
+                            </div>
+                        </div>
+                    </a>
+                }
+            </div>
+        }
+    </div>
+</section>
+
+<section class="section section-alt">
+    <div class="container">
+        <div class="section-header">
+            <h2 class="section-title">Sản phẩm</h2>
+            <a class="text-decoration-none section-link" asp-controller="Product" asp-action="Index">
+                Xem tất cả
+            </a>
+        </div>
+
+        @if (Model.Products == null || !Model.Products.Any())
+        {
+            <div class="empty-state">Chưa có sản phẩm.</div>
+        }
+        else
+        {
+            <div class="grid-cards">
+                @foreach (var p in Model.Products)
+                {
+                    <a class="card-link" asp-controller="Product" asp-action="Display" asp-route-id="@p.Id">
+                        <div class="card-ecommerce product-card">
+                            <div class="product-image">
+                                @if (!string.IsNullOrWhiteSpace(p.ImageUrl))
+                                {
+                                    <img class="product-image-img" src="@p.ImageUrl" alt="@p.Name" />
+                                }
+                                else
+                                {
+                                    <div class="product-image-placeholder" aria-hidden="true"></div>
+                                }
+                            </div>
+                            <div class="card-body">
+                                <h3 class="card-title">@p.Name</h3>
+                                <div class="product-price">@p.Price.ToString("0.##")</div>
+                                <div class="card-meta">@p.Category?.Name</div>
+                            </div>
+                        </div>
+                    </a>
+                }
+            </div>
+        }
+    </div>
+</section>
+

@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using WebApplication1.Models;
 using WebApplication1.Repositories;
@@ -31,12 +32,14 @@ public class CategoriesController : Controller
         return View(category);      
     }
     
+    [Authorize(Roles = SD.Role_Admin)]
     public IActionResult Add()      
     {          
         return View();      
     }       
     
-    [HttpPost]        
+    [HttpPost]
+    [Authorize(Roles = SD.Role_Admin)]        
     public async Task<IActionResult> Add( Category category)      
     {          
         if (ModelState.IsValid)          
@@ -47,6 +50,7 @@ public class CategoriesController : Controller
         return View(category);      
     }       
     
+    [Authorize(Roles = SD.Role_Admin)]
     public async Task<IActionResult> Update(int id)      
     {          
         var category = await _categoryRepository.GetByIdAsync(id);          
@@ -57,7 +61,8 @@ public class CategoriesController : Controller
         return View(category);      
     }       
     
-    [HttpPost]      
+    [HttpPost]
+    [Authorize(Roles = SD.Role_Admin)]      
     public async Task<IActionResult> Update(int id, Category category)      
     {          
         if (id != category.Id)          
@@ -72,6 +77,7 @@ public class CategoriesController : Controller
         return View(category);      
     }      
     
+    [Authorize(Roles = SD.Role_Admin)]
     public async Task<IActionResult> Delete(int id)      
     {           
         var category = await _categoryRepository.GetByIdAsync(id);          
@@ -82,7 +88,8 @@ public class CategoriesController : Controller
         return View(category);      
     }        
     
-    [HttpPost, ActionName("DeleteConfirmed")]      
+    [HttpPost, ActionName("DeleteConfirmed")]
+    [Authorize(Roles = SD.Role_Admin)]      
     public async Task<IActionResult> DeleteConfirmed(int id)      
     {           
         var category = await _categoryRepository.GetByIdAsync(id);          
