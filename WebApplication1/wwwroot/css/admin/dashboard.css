@@ -1,0 +1,30 @@
+.admin-dashboard {
+    padding: 8px 0;
+}
+
+.widget-card {
+    background: rgba(255,255,255,0.85);
+    border: 1px solid rgba(255,255,255,0.20);
+    border-radius: 16px;
+    padding: 18px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.10);
+}
+
+.widget-title {
+    font-weight: 700;
+    color: rgba(0,0,0,0.7);
+}
+
+.widget-value {
+    font-size: 2rem;
+    font-weight: 900;
+    margin-top: 8px;
+}
+
+.admin-section {
+    background: rgba(0,0,0,0.02);
+    border: 1px solid rgba(0,0,0,0.06);
+    border-radius: 16px;
+    padding: 16px;
+}
+

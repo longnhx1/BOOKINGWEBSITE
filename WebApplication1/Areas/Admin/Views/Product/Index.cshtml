@@ -1,0 +1,63 @@
+@model IEnumerable<Product>
+
+@{
+    ViewData["Title"] = "Admin Products";
+}
+
+@section Styles
+{
+    <link rel="stylesheet" href="~/css/admin/product-index.css" asp-append-version="true" />
+}
+
+<div class="admin-page-header">
+    <div>
+        <h2 class="admin-page-title">Products</h2>
+        <div class="admin-page-subtitle">Quản lý sản phẩm</div>
+    </div>
+    <a class="btn btn-primary btn-sm" asp-action="Add">Add Product</a>
+</div>
+
+@if (Model == null || !Model.Any())
+{
+    <div class="empty-state">Chưa có sản phẩm.</div>
+}
+else
+{
+    <div class="admin-product-grid">
+        @foreach (var product in Model)
+        {
+            var desc = product.Description ?? string.Empty;
+            var shown = desc.Length > 200 ? desc.Substring(0, 200) + "..." : desc;
+
+            <div class="admin-product-card">
+                <div class="admin-product-image">
+                    @if (!string.IsNullOrWhiteSpace(product.ImageUrl))
+                    {
+                        <img class="admin-product-image-img" src="@product.ImageUrl" alt="@product.Name" />
+                    }
+                    else
+                    {
+                        <div class="admin-product-image-placeholder" aria-hidden="true"></div>
+                    }
+                </div>
+
+                <div class="admin-product-body">
+                    <div class="admin-product-title-row">
+                        <h3 class="admin-product-title">@product.Name</h3>
+                        <div class="admin-product-price">@product.Price</div>
+                    </div>
+
+                    <div class="admin-product-category">@product.Category?.Name</div>
+                    <div class="admin-product-description">@shown</div>
+
+                    <div class="admin-product-actions">
+                        <a class="btn btn-sm btn-outline-secondary" asp-action="Display" asp-route-id="@product.Id">View</a>
+                        <a class="btn btn-sm btn-outline-primary" asp-action="Update" asp-route-id="@product.Id">Edit</a>
+                        <a class="btn btn-sm btn-outline-danger" asp-action="Delete" asp-route-id="@product.Id">Delete</a>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+}
+

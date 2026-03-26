@@ -1,0 +1,15 @@
+/* Shared layout styles for phone shop (user UI) */
+.navbar-brand {
+    font-weight: 900;
+    letter-spacing: 0.2px;
+}
+
+.nav-link-disabled {
+    cursor: not-allowed;
+}
+
+footer.footer {
+    margin-top: 36px;
+    font-size: 0.95rem;
+}
+

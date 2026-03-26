@@ -1,0 +1,65 @@
+@{
+    ViewData["Title"] = "Admin Dashboard";
+}
+
+@section Styles
+{
+    <link rel="stylesheet" href="~/css/admin/dashboard.css" asp-append-version="true" />
+}
+
+<div class="admin-dashboard">
+    <div class="d-flex align-items-center justify-content-between mb-3">
+        <div>
+            <h1 class="h3 mb-1">Admin Dashboard</h1>
+            <div class="text-muted">Quản lý nhanh sản phẩm, danh mục và đơn hàng.</div>
+        </div>
+    </div>
+
+    <div class="row g-3">
+        <div class="col-md-4">
+            <div class="widget-card">
+                <div class="widget-title">Products</div>
+                <div class="widget-value">@ViewBag.ProductsCount</div>
+                <a class="btn btn-primary btn-sm mt-3" asp-area="Admin" asp-controller="Product" asp-action="Index">
+                    Manage Products
+                </a>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="widget-card">
+                <div class="widget-title">Categories</div>
+                <div class="widget-value">@ViewBag.CategoriesCount</div>
+                <a class="btn btn-primary btn-sm mt-3" asp-area="Admin" asp-controller="Category" asp-action="Index">
+                    Manage Categories
+                </a>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="widget-card">
+                <div class="widget-title">Orders</div>
+                <div class="widget-value">TBD</div>
+                <a class="btn btn-outline-primary btn-sm mt-3" asp-area="Admin" asp-controller="Order" asp-action="Index">
+                    Go to Orders
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <div class="admin-section mt-4">
+        <h2 class="h5">Quick Actions</h2>
+        <div class="d-flex gap-2 flex-wrap">
+            <a class="btn btn-outline-secondary" asp-area="Admin" asp-controller="Product" asp-action="Add">
+                Add Product
+            </a>
+            <a class="btn btn-outline-secondary" asp-area="Admin" asp-controller="Category" asp-action="Add">
+                Add Category
+            </a>
+        </div>
+        <div class="text-muted mt-2">
+            Các module CRUD sẽ được mở rộng ở các bước tiếp theo.
+        </div>
+    </div>
+</div>
+

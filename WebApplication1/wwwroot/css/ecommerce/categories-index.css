@@ -1,0 +1,85 @@
+/* Categories catalog page */
+.grid-cards {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 16px;
+}
+
+.grid-categories {
+    margin-top: 6px;
+}
+
+@media (max-width: 992px) {
+    .grid-cards {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
+
+@media (max-width: 576px) {
+    .grid-cards {
+        grid-template-columns: 1fr;
+    }
+}
+
+.page-header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 16px;
+    margin-bottom: 18px;
+}
+
+.page-title {
+    margin: 0;
+    font-weight: 800;
+    font-size: 1.6rem;
+}
+
+.page-subtitle {
+    margin-top: 4px;
+    color: rgba(0,0,0,0.6);
+}
+
+.empty-state {
+    padding: 18px 16px;
+    border: 1px dashed rgba(0,0,0,0.25);
+    border-radius: 12px;
+    color: rgba(0,0,0,0.6);
+}
+
+.card-ecommerce {
+    border-radius: 16px;
+    border: 1px solid rgba(0,0,0,0.08);
+    background: #fff;
+    overflow: hidden;
+    transition: transform 160ms ease, box-shadow 160ms ease;
+}
+
+.card-ecommerce:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.10);
+}
+
+.card-ecommerce-body {
+    padding: 16px;
+}
+
+.card-title {
+    margin: 0;
+    font-weight: 800;
+    font-size: 1.05rem;
+}
+
+.card-meta {
+    margin-top: 6px;
+    color: rgba(0,0,0,0.6);
+    font-size: 0.95rem;
+}
+
+.card-actions {
+    margin-top: 12px;
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+}
+

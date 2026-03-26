@@ -1,0 +1,59 @@
+/* Admin categories index */
+.admin-page-header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 16px;
+    margin-bottom: 18px;
+}
+
+.admin-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 16px;
+}
+
+@media (max-width: 992px) {
+    .admin-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
+
+@media (max-width: 576px) {
+    .admin-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+.admin-card {
+    border: 1px solid rgba(0,0,0,0.08);
+    background: rgba(255,255,255,0.9);
+    border-radius: 16px;
+    padding: 16px;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.04);
+}
+
+.admin-card-title {
+    font-weight: 800;
+    font-size: 1.05rem;
+    margin-bottom: 6px;
+}
+
+.admin-card-meta {
+    color: rgba(0,0,0,0.6);
+}
+
+.admin-card-actions {
+    margin-top: 12px;
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+}
+
+.empty-state {
+    padding: 18px 16px;
+    border: 1px dashed rgba(0,0,0,0.25);
+    border-radius: 12px;
+    color: rgba(0,0,0,0.6);
+}
+

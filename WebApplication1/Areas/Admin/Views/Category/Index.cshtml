@@ -1,0 +1,42 @@
+@using WebApplication1.Models
+@model IEnumerable<Category>
+
+@{
+    ViewData["Title"] = "Admin Categories";
+}
+
+@section Styles
+{
+    <link rel="stylesheet" href="~/css/admin/categories.css" asp-append-version="true" />
+}
+
+<div class="admin-page-header">
+    <div>
+        <h1 class="h3 mb-1">Categories</h1>
+        <div class="text-muted">Quản lý danh mục</div>
+    </div>
+    <a class="btn btn-primary btn-sm" asp-action="Add">Add Category</a>
+</div>
+
+@if (Model == null || !Model.Any())
+{
+    <div class="empty-state">Chưa có danh mục.</div>
+}
+else
+{
+    <div class="admin-grid">
+        @foreach (var c in Model)
+        {
+            <div class="admin-card">
+                <div class="admin-card-title">@c.Name</div>
+                <div class="admin-card-meta">@((c.Products?.Count ?? 0).ToString()) sản phẩm</div>
+                <div class="admin-card-actions">
+                    <a class="btn btn-sm btn-outline-primary" asp-action="Display" asp-route-id="@c.Id">View</a>
+                    <a class="btn btn-sm btn-outline-secondary" asp-action="Update" asp-route-id="@c.Id">Edit</a>
+                    <a class="btn btn-sm btn-outline-danger" asp-action="Delete" asp-route-id="@c.Id">Delete</a>
+                </div>
+            </div>
+        }
+    </div>
+}
+

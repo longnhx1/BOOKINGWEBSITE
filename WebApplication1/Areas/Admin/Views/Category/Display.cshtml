@@ -1,0 +1,46 @@
+@using WebApplication1.Models
+@model Category
+
+@{
+    ViewData["Title"] = "Category Details (Admin)";
+}
+
+<nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item">
+            <a asp-area="Admin" asp-controller="Dashboard" asp-action="Index">Dashboard</a>
+        </li>
+        <li class="breadcrumb-item">
+            <a asp-action="Index">Categories</a>
+        </li>
+        <li class="breadcrumb-item active" aria-current="page">@Model.Name</li>
+    </ol>
+</nav>
+
+<div class="d-flex align-items-center justify-content-between mb-3">
+    <h1 class="h3 mb-0">@Model.Name</h1>
+    <div class="d-flex gap-2">
+        <a class="btn btn-outline-secondary" asp-action="Index">Back</a>
+        <a class="btn btn-primary" asp-action="Update" asp-route-id="@Model.Id">Manage</a>
+    </div>
+</div>
+
+<h5 class="mt-4">Products</h5>
+
+@if (Model.Products == null || !Model.Products.Any())
+{
+    <div class="text-muted">No products in this category.</div>
+}
+else
+{
+    <ul class="list-group">
+        @foreach (var p in Model.Products)
+        {
+            <li class="list-group-item d-flex justify-content-between align-items-center">
+                <span>@p.Name</span>
+                <span class="text-muted">@p.Price</span>
+            </li>
+        }
+    </ul>
+}
+

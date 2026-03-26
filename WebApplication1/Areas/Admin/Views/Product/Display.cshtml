@@ -1,0 +1,39 @@
+@model Product
+
+@{
+    ViewData["Title"] = "Product Details (Admin)";
+}
+
+<div class="d-flex align-items-center justify-content-between mb-3">
+    <h2 class="mb-0">@Model.Name</h2>
+    <div class="d-flex gap-2">
+        <a class="btn btn-outline-secondary" asp-action="Index">Back</a>
+        <a class="btn btn-primary" asp-action="Update" asp-route-id="@Model.Id">Edit</a>
+    </div>
+</div>
+
+<div class="row g-4">
+    <div class="col-md-4">
+        @if (!string.IsNullOrWhiteSpace(Model.ImageUrl))
+        {
+            <img src="@Model.ImageUrl" alt="Product image" class="img-fluid rounded border" />
+        }
+        else
+        {
+            <div class="border rounded p-4 text-muted">No image</div>
+        }
+    </div>
+    <div class="col-md-8">
+        <dl class="row">
+            <dt class="col-sm-3">Price</dt>
+            <dd class="col-sm-9">@Model.Price</dd>
+
+            <dt class="col-sm-3">Category</dt>
+            <dd class="col-sm-9">@Model.Category?.Name</dd>
+
+            <dt class="col-sm-3">Description</dt>
+            <dd class="col-sm-9">@Model.Description</dd>
+        </dl>
+    </div>
+</div>
+

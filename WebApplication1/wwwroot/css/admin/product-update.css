@@ -1,0 +1,8 @@
+/* Admin product update page */
+.product-preview-img {
+    max-height: 240px;
+    width: 100%;
+    object-fit: contain;
+    display: block;
+}
+

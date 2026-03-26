@@ -1,0 +1,18 @@
+@model Category
+
+@{
+    ViewData["Title"] = "Delete Category (Admin)";
+}
+
+<h2 class="mb-3">Delete Category</h2>
+
+<div class="alert alert-warning">
+    Are you sure you want to delete <strong>@Model.Name</strong>?
+</div>
+
+<form asp-action="DeleteConfirmed" method="post" class="d-flex gap-2">
+    <input type="hidden" asp-for="Id"/>
+    <button type="submit" class="btn btn-danger">Delete</button>
+    <a class="btn btn-outline-secondary" asp-action="Index">Cancel</a>
+</form>
+

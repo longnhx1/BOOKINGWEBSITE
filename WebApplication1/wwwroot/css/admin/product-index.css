@@ -1,0 +1,125 @@
+/* Admin product index */
+.admin-page-header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 16px;
+    margin-bottom: 18px;
+}
+
+.admin-page-title {
+    margin: 0;
+    font-weight: 900;
+    font-size: 1.6rem;
+}
+
+.admin-page-subtitle {
+    margin-top: 4px;
+    color: rgba(255,255,255,0.75);
+    font-weight: 500;
+}
+
+.empty-state {
+    padding: 18px 16px;
+    border: 1px dashed rgba(0,0,0,0.25);
+    border-radius: 12px;
+    color: rgba(0,0,0,0.6);
+}
+
+.admin-product-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 16px;
+}
+
+@media (max-width: 992px) {
+    .admin-product-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
+
+@media (max-width: 576px) {
+    .admin-product-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+.admin-product-card {
+    border-radius: 16px;
+    border: 1px solid rgba(0,0,0,0.08);
+    background: rgba(255,255,255,0.92);
+    overflow: hidden;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+    transition: transform 160ms ease, box-shadow 160ms ease;
+}
+
+.admin-product-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 14px 40px rgba(0,0,0,0.08);
+}
+
+.admin-product-image {
+    height: 190px;
+    background: rgba(0,0,0,0.03);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.admin-product-image-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+.admin-product-image-placeholder {
+    width: 58%;
+    height: 52%;
+    border-radius: 14px;
+    border: 1px dashed rgba(0,0,0,0.20);
+    background: rgba(0,0,0,0.02);
+}
+
+.admin-product-body {
+    padding: 14px 16px 16px 16px;
+}
+
+.admin-product-title-row {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 10px;
+}
+
+.admin-product-title {
+    margin: 0;
+    font-weight: 900;
+    font-size: 1.05rem;
+}
+
+.admin-product-price {
+    font-weight: 900;
+    white-space: nowrap;
+}
+
+.admin-product-category {
+    margin-top: 6px;
+    color: rgba(0,0,0,0.6);
+    font-size: 0.95rem;
+}
+
+.admin-product-description {
+    margin-top: 10px;
+    color: rgba(0,0,0,0.7);
+    font-size: 0.95rem;
+    overflow: hidden;
+}
+
+.admin-product-actions {
+    margin-top: 12px;
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+}
+

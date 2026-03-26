@@ -1,0 +1,29 @@
+@model WebApplication1.Models.Order
+
+@{
+    ViewData["Title"] = "Thanh toán";
+}
+
+<h1>Thanh toán</h1>
+
+<form asp-action="Checkout" method="post">
+    <div class="mb-3">
+        <label asp-for="ShippingAddress" class="form-label">Địa chỉ giao hàng</label>
+        <input asp-for="ShippingAddress" class="form-control" />
+        <span asp-validation-for="ShippingAddress" class="text-danger"></span>
+    </div>
+    <div class="mb-3">
+        <label asp-for="Notes" class="form-label">Ghi chú</label>
+        <textarea asp-for="Notes" class="form-control" rows="4"></textarea>
+    </div>
+    <div class="mb-3">
+        <label class="form-label">Tổng</label>
+        <input class="form-control" value="@(Model.TotalPrice)" readonly />
+    </div>
+    <button type="submit" class="btn btn-primary">Xác nhận đơn hàng</button>
+    <a class="btn btn-secondary" asp-action="Index">Quay lại giỏ hàng</a>
+</form>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

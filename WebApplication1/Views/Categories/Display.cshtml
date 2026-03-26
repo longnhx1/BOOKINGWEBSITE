@@ -1,0 +1,76 @@
+@model Category
+@using WebApplication1.Models
+
+@{
+    ViewData["Title"] = "Category Details";
+}
+
+@section Styles
+{
+    <link rel="stylesheet" href="~/css/ecommerce/category-display.css" asp-append-version="true" />
+}
+
+<nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item">
+            <a asp-controller="Home" asp-action="Index">Home</a>
+        </li>
+        <li class="breadcrumb-item">
+            <a asp-controller="Categories" asp-action="Index">Categories</a>
+        </li>
+        <li class="breadcrumb-item active" aria-current="page">@Model.Name</li>
+    </ol>
+</nav>
+
+<div class="d-flex align-items-center justify-content-between mb-3">
+    <h1 class="mb-0">@Model.Name</h1>
+    <div class="d-flex gap-2">
+        @if (User.IsInRole(SD.Role_Admin))
+        {
+            <a class="btn btn-outline-secondary btn-sm" asp-area="Admin" asp-controller="Category" asp-action="Index">Quay lại Admin</a>
+            <a class="btn btn-primary btn-sm" asp-area="Admin" asp-controller="Category" asp-action="Update" asp-route-id="@Model.Id">Manage</a>
+        }
+        else
+        {
+            <a class="btn btn-outline-secondary btn-sm" asp-action="Index">Quay lại danh mục</a>
+        }
+    </div>
+</div>
+
+<div class="mt-4">
+    <div class="mb-3">
+        <div class="fw-bold">Sản phẩm trong danh mục</div>
+        <div class="text-muted">@((Model.Products?.Count ?? 0).ToString()) sản phẩm</div>
+    </div>
+
+    @if (Model.Products == null || !Model.Products.Any())
+    {
+        <div class="text-muted">Chưa có sản phẩm.</div>
+    }
+    else
+    {
+        <div class="category-products-grid">
+            @foreach (var p in Model.Products)
+            {
+                <a class="category-product-link" asp-controller="Product" asp-action="Display" asp-route-id="@p.Id">
+                    <div class="category-product-card">
+                        <div class="category-product-image">
+                            @if (!string.IsNullOrWhiteSpace(p.ImageUrl))
+                            {
+                                <img src="@p.ImageUrl" alt="@p.Name" />
+                            }
+                            else
+                            {
+                                <div class="category-product-image-placeholder" aria-hidden="true"></div>
+                            }
+                        </div>
+                        <div class="category-product-body">
+                            <div class="category-product-title">@p.Name</div>
+                            <div class="category-product-price">@p.Price</div>
+                        </div>
+                    </div>
+                </a>
+            }
+        </div>
+    }
+</div>

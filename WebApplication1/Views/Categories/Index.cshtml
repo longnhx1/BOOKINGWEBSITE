@@ -1,0 +1,60 @@
+@using WebApplication1.Models
+@model IEnumerable<Category>
+
+@{
+    ViewData["Title"] = "Danh mục";
+}
+
+@section Styles
+{
+    <link rel="stylesheet" href="~/css/ecommerce/categories-index.css" asp-append-version="true" />
+}
+
+<div class="page-header">
+    <div>
+        <h2 class="page-title">Danh mục</h2>
+        <div class="page-subtitle">Danh sách danh mục</div>
+    </div>
+
+    @if (User.IsInRole(SD.Role_Admin))
+    {
+        <a class="btn btn-primary" asp-area="Admin" asp-controller="Category" asp-action="Add">
+            Thêm danh mục
+        </a>
+    }
+</div>
+
+@if (Model == null || !Model.Any())
+{
+    <div class="empty-state">Chưa có danh mục.</div>
+}
+else
+{
+    <div class="grid-cards grid-categories">
+        @foreach (var c in Model)
+        {
+            <div class="card-ecommerce card-category">
+                <div class="card-ecommerce-body">
+                    <h3 class="card-title">@c.Name</h3>
+                    <div class="card-meta">@((c.Products?.Count ?? 0).ToString()) sản phẩm</div>
+
+                    <div class="card-actions">
+                        <a class="btn btn-sm btn-outline-primary" asp-action="Display" asp-route-id="@c.Id">
+                            View
+                        </a>
+
+                        @if (User.IsInRole(SD.Role_Admin))
+                        {
+                            <a class="btn btn-sm btn-outline-secondary" asp-area="Admin" asp-controller="Category" asp-action="Update" asp-route-id="@c.Id">
+                                Edit
+                            </a>
+                            <a class="btn btn-sm btn-outline-danger" asp-area="Admin" asp-controller="Category" asp-action="Delete" asp-route-id="@c.Id">
+                                Delete
+                            </a>
+                        }
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+}
